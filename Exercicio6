@@ -1,0 +1,81 @@
+class Produto {
+    private nome: string;
+    private preco: number;
+    private quantidadeEmEstoque: number;
+
+    constructor(nome: string, preco: number, quantidadeEmEstoque: number) {
+        this.nome = nome;
+        this.preco = preco;
+        this.quantidadeEmEstoque = quantidadeEmEstoque;
+    }
+
+    atualizarPreco(novoPreco: number): void {
+        if (novoPreco > 0) {
+            this.preco = novoPreco;
+            console.log(`O preço do produto "${this.nome}" foi atualizado para R$${this.preco.toFixed(2)}`);
+        } else {
+            console.log("O preço deve ser um valor positivo.");
+        }
+    }
+
+    adicionarEstoque(quantidade: number): void {
+        if (quantidade > 0) {
+            this.quantidadeEmEstoque += quantidade;
+            console.log(`Foram adicionadas ${quantidade} unidades ao estoque do produto "${this.nome}".`);
+        } else {
+            console.log("A quantidade a ser adicionada deve ser positiva.");
+        }
+    }
+
+    removerEstoque(quantidade: number): void {
+        if (quantidade > 0 && quantidade <= this.quantidadeEmEstoque) {
+            this.quantidadeEmEstoque -= quantidade;
+            console.log(`Foram removidas ${quantidade} unidades do estoque do produto "${this.nome}".`);
+        } else {
+            console.log("Quantidade inválida para remoção.");
+        }
+    }
+
+    exibirDetalhes(): void {
+        console.log(`Produto: ${this.nome} | Preço: R$${this.preco.toFixed(2)} | Estoque: ${this.quantidadeEmEstoque} unidades`);
+    }
+}
+
+class CadastroProdutos {
+    private produtos: Produto[] = [];
+
+    adicionarProduto(produto: Produto): void {
+        this.produtos.push(produto);
+        console.log(`Produto "${produto['nome']}" adicionado ao cadastro.`);
+    }
+
+    atualizarPrecoProduto(nome: string, novoPreco: number): void {
+        const produto = this.produtos.find(p => p['nome'] === nome);
+        if (produto) {
+            produto.atualizarPreco(novoPreco);
+        } else {
+            console.log(`Produto "${nome}" não encontrado.`);
+        }
+    }
+
+    exibirRelatorio(): void {
+        console.log("\n=== Relatório de Produtos ===");
+        this.produtos.forEach(produto => produto.exibirDetalhes());
+    }
+}
+
+const cadastro = new CadastroProdutos();
+
+const produto1 = new Produto("Notebook", 3500, 10);
+const produto2 = new Produto("Mouse", 150, 50);
+const produto3 = new Produto("Teclado", 300, 30);
+
+cadastro.adicionarProduto(produto1);
+cadastro.adicionarProduto(produto2);
+cadastro.adicionarProduto(produto3);
+
+produto1.adicionarEstoque(5);
+produto2.removerEstoque(10);
+cadastro.atualizarPrecoProduto("Teclado", 280);
+
+cadastro.exibirRelatorio();

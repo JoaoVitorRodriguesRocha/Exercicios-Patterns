@@ -1,0 +1,50 @@
+class Tarefa {
+    private descricao: string;
+    private concluida: boolean;
+
+    constructor(descricao: string) {
+        this.descricao = descricao;
+        this.concluida = false;
+    }
+
+    marcarComoConcluida(): void {
+        this.concluida = true;
+    }
+
+    exibirDetalhes(): void {
+        console.log(`Tarefa: ${this.descricao} | Status: ${this.concluida ? "Concluída" : "Pendente"}`);
+    }
+}
+
+class GerenciadorTarefas {
+    private tarefas: Tarefa[] = [];
+
+    adicionarTarefa(descricao: string): void {
+        const novaTarefa = new Tarefa(descricao);
+        this.tarefas.push(novaTarefa);
+        console.log(`Tarefa "${descricao}" adicionada.`);
+    }
+
+    marcarComoConcluida(indice: number): void {
+        if (indice >= 0 && indice < this.tarefas.length) {
+            this.tarefas[indice].marcarComoConcluida();
+            console.log(`Tarefa "${this.tarefas[indice]}" marcada como concluída.`);
+        } else {
+            console.log("Índice inválido.");
+        }
+    }
+
+    exibirTarefas(): void {
+        console.log("Lista de Tarefas:");
+        this.tarefas.forEach((tarefa, index) => {
+            console.log(`${index + 1}. ${tarefa.exibirDetalhes()}`);
+        });
+    }
+}
+
+const meuGerenciador = new GerenciadorTarefas();
+meuGerenciador.adicionarTarefa("Estudar TypeScript");
+meuGerenciador.adicionarTarefa("Fazer exercícios de POO");
+meuGerenciador.exibirTarefas();
+meuGerenciador.marcarComoConcluida(0);
+meuGerenciador.exibirTarefas();

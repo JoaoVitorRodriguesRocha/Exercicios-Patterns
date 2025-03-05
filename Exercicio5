@@ -1,0 +1,47 @@
+class Retangulo2 {
+    private largura: number;
+    private altura: number;
+
+    constructor(largura: number, altura: number) {
+        this.largura = largura;
+        this.altura = altura;
+    }
+
+    calcularArea(): number {
+        return this.largura * this.altura;
+    }
+
+    calcularPerimetro(): number {
+        return 2 * (this.largura + this.altura);
+    }
+
+    exibirDetalhes(): void {
+        console.log(`Retângulo -> Largura: ${this.largura}, Altura: ${this.altura}, Área: ${this.calcularArea()}, Perímetro: ${this.calcularPerimetro()}`);
+    }
+}
+
+class Circulo {
+    private raio: number;
+
+    constructor(raio: number) {
+        this.raio = raio;
+    }
+
+    calcularArea(): number {
+        return Math.PI * Math.pow(this.raio, 2);
+    }
+
+    calcularPerimetro(): number {
+        return 2 * Math.PI * this.raio;
+    }
+
+    exibirDetalhes(): void {
+        console.log(`Círculo -> Raio: ${this.raio}, Área: ${this.calcularArea().toFixed(2)}, Perímetro: ${this.calcularPerimetro().toFixed(2)}`);
+    }
+}
+
+const meuRetangulo = new Retangulo2(10, 5);
+meuRetangulo.exibirDetalhes();
+
+const meuCirculo = new Circulo(7);
+meuCirculo.exibirDetalhes();

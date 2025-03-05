@@ -1,0 +1,44 @@
+interface Notificacao {
+    enviar(mensagem: string): void;
+}
+
+class EmailNotificacao implements Notificacao {
+    enviar(mensagem: string): void {
+        console.log(`Enviando e-mail: ${mensagem}`);
+    }
+}
+
+class SmsNotificacao implements Notificacao {
+    enviar(mensagem: string): void {
+        console.log(`Enviando SMS: ${mensagem}`);
+    }
+}
+
+class PushNotificacao implements Notificacao {
+    enviar(mensagem: string): void {
+        console.log(`Enviando push notification: ${mensagem}`);
+    }
+}
+
+class Usuario {
+    private nome: string;
+
+    constructor(nome: string) {
+        this.nome = nome;
+    }
+
+    receberNotificacao(notificacao: Notificacao, mensagem: string): void {
+        console.log(`Usuário "${this.nome}" recebeu uma notificação:`);
+        notificacao.enviar(mensagem);
+    }
+}
+
+const usuario1 = new Usuario("João");
+
+const email = new EmailNotificacao();
+const sms = new SmsNotificacao();
+const push = new PushNotificacao();
+
+usuario1.receberNotificacao(email, "Seu pedido foi confirmado!");
+usuario1.receberNotificacao(sms, "Seu código de verificação é 1234.");
+usuario1.receberNotificacao(push, "Você tem uma nova mensagem no aplicativo.");

@@ -1,0 +1,33 @@
+class ContaBancaria {
+    private numero: number;
+    private saldo: number;
+
+    constructor(numero: number, saldoInicial: number) {
+        this.numero = numero;
+        this.saldo = saldoInicial;
+        console.log(`Conta ${numero} criada com saldo inicial de R$${saldoInicial}.`);
+    }
+
+    depositar(valor: number): void {
+        this.saldo += valor;
+        console.log(`Depósito de R$${valor} realizado na conta ${this.numero}. Novo saldo: R$${this.saldo}.`);
+    }
+
+    sacar(valor: number): void {
+        if (this.saldo >= valor) {
+            this.saldo -= valor;
+            console.log(`Saque de R$${valor} realizado na conta ${this.numero}. Novo saldo: R$${this.saldo}.`);
+        } else {
+            console.log("Saldo insuficiente.");
+        }
+    }
+
+    consultarSaldo(): void {
+        console.log(`Saldo da conta ${this.numero}: R$${this.saldo}.`);
+    }
+}
+
+const minhaConta = new ContaBancaria(123, 1000);
+minhaConta.depositar(500);
+minhaConta.sacar(200);
+minhaConta.consultarSaldo();
